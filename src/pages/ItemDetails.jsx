@@ -274,12 +274,12 @@ function ItemDetail() {
                 {imageFile ? imageFile.name : 'Change photo'}
               </span>
               <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={handleImageChange}
-                className="hidden"
-              />
+  type="file"
+  accept=".jpg, .jpeg, .png, .webp"
+  onChange={handleImageChange}
+  className="hidden"
+/>
+
             </label>
           </div>
 

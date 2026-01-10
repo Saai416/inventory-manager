@@ -185,12 +185,12 @@ function AddItem() {
                 {imageFile ? imageFile.name : 'Take photo or choose from gallery'}
               </span>
               <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={handleImageChange}
-                className="hidden"
-              />
+  type="file"
+  accept=".jpg, .jpeg, .png, .webp"
+  onChange={handleImageChange}
+  className="hidden"
+/>
+
             </label>
             <p className="text-xs text-gray-500 mt-2">Click to take a photo or select from gallery</p>
           </div>
