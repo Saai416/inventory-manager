@@ -82,9 +82,10 @@ function CategoryItems() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    // Added flex and h-screen to make the layout manage the keyboard better
+    <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <header className="bg-white border-b border-gray-200 shrink-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex items-center gap-4 mb-4">
             <button 
@@ -106,17 +107,39 @@ function CategoryItems() {
             </div>
           </div>
           
-          <input
-            type="text"
-            placeholder="Search items..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-          />
+          {/* --- UPDATED SEARCH INPUT SECTION --- */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search items..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              // Added onKeyDown to dismiss keyboard on Enter
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.target.blur();
+                }
+              }}
+              // Added placeholder-gray-500 to ensure prompt is visible
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none placeholder-gray-500 text-gray-900"
+            />
+            {/* Added a Search Icon for better UX */}
+            <svg 
+              className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          {/* ------------------------------------ */}
+
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      {/* Main Content - Added overflow-y-auto to allow scrolling independently of keyboard */}
+      <main className="flex-1 overflow-y-auto max-w-7xl mx-auto px-6 py-8 w-full">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           <div className="bg-white border border-gray-200 rounded-lg p-5">
@@ -189,7 +212,7 @@ function CategoryItems() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pb-20">
             {filteredItems.map((item) => {
               const isOutOfStock = item.quantity === 0;
               const isLowStock = item.quantity > 0 && item.quantity <= item.min_stock;
@@ -248,7 +271,7 @@ function CategoryItems() {
                       </div>
                     </div>
 
-                    {/* Better +/- Buttons */}
+                    {/* +/- Buttons */}
                     <div className="flex items-center gap-3 mt-5">
                       <button
                         onClick={(e) => {

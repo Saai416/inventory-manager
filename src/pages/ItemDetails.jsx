@@ -205,37 +205,50 @@ function ItemDetail() {
             </div>
           </div>
 
-          {/* Add/Remove Quantity */}
+          {/* --- UPDATED ADD/REMOVE STOCK SECTION --- */}
           <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
             <label className="block text-sm font-medium text-gray-700 mb-3">
               Add or Remove Stock
             </label>
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                value={addQuantity}
-                onChange={(e) => setAddQuantity(e.target.value)}
-                placeholder="Enter quantity"
-                min="0"
-                className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-center font-semibold text-lg"
-              />
-              <button
-                type="button"
-                onClick={handleAddQuantity}
-                className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition shadow-md font-semibold"
-              >
-                + Add
-              </button>
+            
+            {/* Input is now full width on its own line */}
+            <input
+              type="number"
+              value={addQuantity}
+              onChange={(e) => setAddQuantity(e.target.value)}
+              placeholder="Enter quantity"
+              min="0"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-center font-semibold text-lg mb-2"
+            />
+            
+            <p className="text-xs text-gray-600 mb-4 text-center">Type a number above, then click a button below</p>
+
+            {/* Buttons are in a new row below the input */}
+            <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={handleRemoveQuantity}
-                className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition shadow-md font-semibold"
+                className="flex-1 px-4 py-3 bg-white border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition shadow-sm font-semibold flex items-center justify-center gap-2"
               >
-                - Remove
+                <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/></svg>
+                </div>
+                Remove
+              </button>
+
+              <button
+                type="button"
+                onClick={handleAddQuantity}
+                className="flex-1 px-4 py-3 bg-white border border-green-200 text-green-600 rounded-lg hover:bg-green-50 transition shadow-sm font-semibold flex items-center justify-center gap-2"
+              >
+                 <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                 </div>
+                Add
               </button>
             </div>
-            <p className="text-xs text-gray-600 mt-2">Type a number and click Add or Remove</p>
           </div>
+          {/* -------------------------------------- */}
 
           {/* Minimum Stock */}
           <div className="mb-6">
@@ -266,34 +279,33 @@ function ItemDetail() {
             )}
 
            {/* Camera Button */}
-<label className="w-full flex flex-col items-center px-4 py-6 bg-white border-2 border-dashed border-blue-300 rounded-lg cursor-pointer hover:border-blue-500 transition mb-3">
-  <svg className="w-12 h-12 text-blue-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-  </svg>
-  <span className="text-sm font-medium text-gray-700">📸 Take Photo with Camera</span>
-  <input
-    type="file"
-    accept="image/*"
-    capture="environment"
-    onChange={handleImageChange}
-    className="hidden"
-  />
-</label>
+            <label className="w-full flex flex-col items-center px-4 py-6 bg-white border-2 border-dashed border-blue-300 rounded-lg cursor-pointer hover:border-blue-500 transition mb-3">
+              <svg className="w-12 h-12 text-blue-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+              </svg>
+              <span className="text-sm font-medium text-gray-700">📸 Take Photo with Camera</span>
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </label>
 
-{/* Gallery Button */}
-<label className="w-full flex flex-col items-center px-4 py-6 bg-white border-2 border-dashed border-green-300 rounded-lg cursor-pointer hover:border-green-500 transition">
-  <svg className="w-12 h-12 text-green-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  </svg>
-  <span className="text-sm font-medium text-gray-700">🖼️ Choose from Gallery</span>
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleImageChange}
-    className="hidden"
-  />
-</label>
-
+            {/* Gallery Button */}
+            <label className="w-full flex flex-col items-center px-4 py-6 bg-white border-2 border-dashed border-green-300 rounded-lg cursor-pointer hover:border-green-500 transition">
+              <svg className="w-12 h-12 text-green-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="text-sm font-medium text-gray-700">🖼️ Choose from Gallery</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+            </label>
           </div>
 
           {/* Action Buttons */}
