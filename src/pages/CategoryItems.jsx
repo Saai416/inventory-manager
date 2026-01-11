@@ -82,7 +82,6 @@ function CategoryItems() {
   }
 
   return (
-    // Added flex and h-screen to make the layout manage the keyboard better
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 shrink-0 z-50">
@@ -107,23 +106,19 @@ function CategoryItems() {
             </div>
           </div>
           
-          {/* --- UPDATED SEARCH INPUT SECTION --- */}
           <div className="relative">
             <input
               type="text"
               placeholder="Search items..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              // Added onKeyDown to dismiss keyboard on Enter
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.target.blur();
                 }
               }}
-              // Added placeholder-gray-500 to ensure prompt is visible
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none placeholder-gray-500 text-gray-900"
             />
-            {/* Added a Search Icon for better UX */}
             <svg 
               className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" 
               fill="none" 
@@ -133,12 +128,10 @@ function CategoryItems() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          {/* ------------------------------------ */}
 
         </div>
       </header>
 
-      {/* Main Content - Added overflow-y-auto to allow scrolling independently of keyboard */}
       <main className="flex-1 overflow-y-auto max-w-7xl mx-auto px-6 py-8 w-full">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
@@ -222,13 +215,18 @@ function CategoryItems() {
                   key={item.id}
                   className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition"
                 >
-                  {/* Item Image - Clickable to edit */}
+                  {/* Item Image - UPDATED HERE */}
                   <div 
                     onClick={() => navigate(`/item/${item.id}`)}
                     className="h-48 bg-gray-50 flex items-center justify-center cursor-pointer hover:bg-gray-100 transition"
                   >
                     {item.image_url ? (
-                      <img src={item.image_url} alt={item.name} className="h-full w-full object-cover" />
+                      <img 
+                        src={item.image_url} 
+                        alt={item.name} 
+                        // The fix: object-contain with padding
+                        className="h-full w-full object-contain p-2" 
+                      />
                     ) : (
                       <svg className="w-20 h-20 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
