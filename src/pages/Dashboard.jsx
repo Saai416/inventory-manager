@@ -225,9 +225,15 @@ function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h1 className="text-xl font-semibold text-gray-900">Inventory Management</h1>
-              <p className="text-xs text-gray-500 mt-1">Service Center Stock Control</p>
+              {/* UPDATED TITLE: Large, Red, and Bold - ONLY THIS CHANGED */}
+              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-red-600 uppercase drop-shadow-sm">
+  LAKSHMI ENGINEERING
+</h1>
+              <p className="text-xs text-gray-500 mt-1 font-medium tracking-wide">
+                Service Center Stock Control
+              </p>
             </div>
+            {/* Button remains BLUE */}
             <button 
               onClick={() => setShowAddModal(true)}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-medium text-sm"
@@ -237,6 +243,7 @@ function Dashboard() {
           </div>
           
           <div className="relative">
+            {/* Search focus remains BLUE */}
             <input
               type="text"
               placeholder="Search items..."
